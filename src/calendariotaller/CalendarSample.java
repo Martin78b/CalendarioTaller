@@ -40,6 +40,7 @@ import com.google.api.services.calendar.model.Events;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
@@ -78,8 +79,9 @@ public class CalendarSample {
   /** Authorizes the installed application to access user's protected data. */
   private static Credential authorize() throws Exception {
     // load client secrets
-    GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-        new InputStreamReader(CalendarSample.class.getResourceAsStream("/client_secrets.json")));
+    Reader lector = new InputStreamReader(CalendarSample.class.getResourceAsStream("/client_secrets.json"));
+    GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, lector);
+        
     if (clientSecrets.getDetails().getClientId().startsWith("Enter")
         || clientSecrets.getDetails().getClientSecret().startsWith("Enter ")) {
       System.out.println(
