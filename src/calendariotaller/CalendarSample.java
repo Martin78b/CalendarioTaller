@@ -79,7 +79,7 @@ public class CalendarSample {
   /** Authorizes the installed application to access user's protected data. */
   private static Credential authorize() throws Exception {
     // load client secrets
-    Reader lector = new InputStreamReader(CalendarSample.class.getResourceAsStream("/client_secrets.json"));
+    Reader lector = new InputStreamReader(CalendarSample.class.getResourceAsStream("./client_secrets.json"));
     GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, lector);
         
     if (clientSecrets.getDetails().getClientId().startsWith("Enter")
