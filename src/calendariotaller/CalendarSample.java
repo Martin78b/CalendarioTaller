@@ -14,6 +14,8 @@
 
 package calendariotaller;
 
+import org.mortbay.jetty.*;
+import javax.servlet.http.HttpServletRequest;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -79,7 +81,7 @@ public class CalendarSample {
   /** Authorizes the installed application to access user's protected data. */
   private static Credential authorize() throws Exception {
     // load client secrets
-    Reader lector = new InputStreamReader(CalendarSample.class.getResourceAsStream("./client_secrets.json"));
+    Reader lector = new InputStreamReader(CalendarSample.class.getResourceAsStream("/calendariotaller/client_secrets.json"));
     GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, lector);
         
     if (clientSecrets.getDetails().getClientId().startsWith("Enter")
