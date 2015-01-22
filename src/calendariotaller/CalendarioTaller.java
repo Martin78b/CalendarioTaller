@@ -9,6 +9,9 @@ package calendariotaller;
  *
  * @author martin
  */
+
+import java.sql.*;
+
 public class CalendarioTaller {
 
     /**
