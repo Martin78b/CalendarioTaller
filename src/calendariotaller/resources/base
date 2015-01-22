@@ -1,0 +1,10 @@
+CREATE TABLE calendario (
+    "id" int NOT NULL,
+    "servicio" varchar(60) NOT NULL,
+    "mail" varchar(128) NOT NULL,
+    "nombre" varchar(60) NOT NULL,
+    "color" int NOT NULL,
+    "usuario" char(50) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (usuario) REFERENCES usuario
+)
