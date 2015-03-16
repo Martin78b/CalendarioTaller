@@ -1,0 +1,19 @@
+Mon Mar 16 15:30:47 ART 2015 : Apache Derby Network Server - 10.8.3.0 - (1405108) se ha iniciado y está listo para aceptar conexiones en el puerto 1527
+----------------------------------------------------------------
+Mon Mar 16 15:30:47 ART 2015:
+ Arrancando Derby versión The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instancia a816c00e-014c-23da-2c31-00006cda51d7 
+en el directorio de base de datos C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources\calandario  con el cargador de clases sun.misc.Launcher$AppClassLoader@3b061299
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_45-b18
+user.dir=C:\Program Files\Java\jdk1.7.0_45\db
+os.name=Windows 8
+os.arch=amd64
+os.version=6.2
+derby.system.home=C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources
+Cargador de clases de base de datos iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Mar 16 15:40:54 ART 2015: cerrando motor de Derby
+----------------------------------------------------------------
+Mon Mar 16 15:40:54 ART 2015:
+Cerrando la instancia a816c00e-014c-23da-2c31-00006cda51d7 en el directorio de base de datos C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources\calandario con cargador de clases sun.misc.Launcher$AppClassLoader@3b061299
