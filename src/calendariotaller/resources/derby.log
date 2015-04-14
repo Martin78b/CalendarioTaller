@@ -29,3 +29,5 @@ os.arch=i386
 os.version=3.13.0-49-generic
 derby.system.home=/home/martin/NetBeansProjects/CalendarioTaller/src/calendariotaller/resources
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Apr 14 19:07:32 ART 2015: cerrando motor de Derby
