@@ -43,6 +43,9 @@ import com.google.api.services.calendar.model.Events;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
@@ -121,6 +124,30 @@ public class CalendarSample {
       Calendar calendar = addCalendar();
       updateCalendar(calendar);
       addEvent(calendar);
+      
+      //Intentando guardar en base de datos.
+      //jdbc:derby://localhost:1527/calendario
+        String dbURL = "jdbc:derby://localhost:1527/calendario;user=;password=";
+        Connection conn = DriverManager.getConnection(dbURL);
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate("set schema APP");
+        stmt.executeUpdate("INSERT INTO evento VALUES ");
+        stmt.close();
+        
+        
+        stmt.executeUpdate("set schema APP");
+        Event ev = new Event();
+        stmt.executeUpdate("INSERT INTO evento VALUES (1,"+ev.getStatus()+","+ev.getCreated()+","+ev.getUpdated()+
+                ","+ev.getSummary()+","+ev.getDescription()+","+ev.getLocation()+","+
+                ev.getColorId()+","+ev.getStart().getDate().toString()+","+ev.getStart().toString()+
+                ","+ev.getStart().getTimeZone()+","+ev.getEnd().getDate().toString()+","+
+                ev.getEnd().getDateTime().toString()+","+ev.getEnd().getTimeZone().toString()+","+
+                ev.getRecurrence().toString()+","+ev.getRecurringEventId()+","+
+                ev.getOriginalStartTime().getDate().toString()+","+ev.getOriginalStartTime().getDateTime().toString()+
+                ","+ev.getOriginalStartTime().getTimeZone().toString()+","+ev.getTransparency()+","+
+                ev.getVisibility()+","+ev.getICalUID()+","ev.getSequence()+","+ev.getReminders().toString()+",sms,15,CalendarioID)");
+        stmt.close();
+      
       showEvents(calendar);
       deleteCalendarsUsingBatch();
       deleteCalendar(calendar);
