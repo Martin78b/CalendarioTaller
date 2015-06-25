@@ -122,19 +122,23 @@ public class CalendarSample {
       showCalendars();
       addCalendarsUsingBatch();
       Calendar calendar = addCalendar();
+      
       updateCalendar(calendar);
       addEvent(calendar);
       
       //Intentando guardar en base de datos.
       //jdbc:derby://localhost:1527/calendario
-        String dbURL = "jdbc:derby://localhost:1527/calendario;user=;password=";
+        String dbURL = "jdbc:derby://localhost:1527/calendario";
         Connection conn = DriverManager.getConnection(dbURL);
         Statement stmt = conn.createStatement();
         stmt.executeUpdate("set schema APP");
-        stmt.executeUpdate("INSERT INTO evento VALUES ");
+        stmt.executeUpdate("INSERT INTO CALENDARIO (id, summary, description, location, tomezone, kind, cuenta)"
+                + "VALUES ("+calendar.getId()+","+calendar.getSummary()+","+calendar.getDescription()+","+calendar.getLocation()+","
+                +calendar.getTimeZone()+","+calendar.getKind()+",'yo')");
         stmt.close();
         
-        
+      
+       /** 
         stmt.executeUpdate("set schema APP");
         Event ev = new Event();
         stmt.executeUpdate("INSERT INTO evento VALUES (1,"+ev.getStatus()+","+ev.getCreated()+","+ev.getUpdated()+
@@ -147,7 +151,7 @@ public class CalendarSample {
                 ","+ev.getOriginalStartTime().getTimeZone().toString()+","+ev.getTransparency()+","+
                 ev.getVisibility()+","+ev.getICalUID()+","ev.getSequence()+","+ev.getReminders().toString()+",sms,15,CalendarioID)");
         stmt.close();
-      
+      */
       showEvents(calendar);
       deleteCalendarsUsingBatch();
       deleteCalendar(calendar);

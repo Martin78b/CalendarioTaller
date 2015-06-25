@@ -17,8 +17,14 @@ public class CalendarioTaller {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws SQLException {
+        String dbURL = "jdbc:derby://localhost:1527/calendario;";
+        Connection conn = DriverManager.getConnection(dbURL);
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate("set schema APP");
+        stmt.executeUpdate("INSERT INTO CUENTA (ID, EMAIL, DISPLAYNAME, SERVICIO, TOKEN, USUARIO) "
+                + "VALUES ('1', 'a@a.com', 'yo', 'Google', '1', 'yo')");
+        stmt.close();
     }
     
 }
