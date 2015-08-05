@@ -5,10 +5,17 @@
  */
 package dao;
 
+import entidades.Usuario;
+
 /**
  *
  * @author Martin
  */
 public interface IUsuario {
     
+    public void guardar(Usuario usuario);
+    
+    public void actualizar (Usuario usuario);
+    
+    public void borrar (Usuario usuario);
 }
