@@ -6,12 +6,16 @@
 package dao;
 
 import entidades.Usuario;
+import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +24,7 @@ import java.util.logging.Logger;
 public class UsuarioDAO implements IUsuario{
 
     @Override
-    public void guardar(Usuario usuario) {
+    public void guardar(Usuario usuario) throws SQLIntegrityConstraintViolationException{
         try {
             String dbURL = "jdbc:derby://localhost:1527/calendario";
             Connection conn = DriverManager.getConnection(dbURL);
@@ -47,7 +51,33 @@ public class UsuarioDAO implements IUsuario{
 
     @Override
     public void borrar(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            stmt.executeUpdate("INSERT INTO USUARIO (nombre, password) values ('"+ usuario.getNombre()+"', '"+usuario.getPassword()+"')");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    @Override
+    public Usuario cargar(String nombre){
+        Usuario user = new Usuario();
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            ResultSet rs = stmt.executeQuery("SELECT nombre, password FROM USUARIO WHERE nombre='"+nombre+"'");
+            while(rs.next()){            
+                user.setPassword(rs.getString("password"));
+                user.setNombre(nombre);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+    }
 }
