@@ -5,10 +5,21 @@
  */
 package dao;
 
+import entidades.Calendario;
+import entidades.Usuario;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 /**
  *
  * @author Martin
  */
 public interface ICalendario {
+    public void guardar(Calendario calendario);
+    
+    public void actualizar (Calendario calendario);
+    
+    public void borrar (Calendario calendario);
+    
+    public Usuario cargar(String id);
     
 }
