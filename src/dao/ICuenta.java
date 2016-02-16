@@ -5,10 +5,21 @@
  */
 package dao;
 
+import entidades.Cuenta;
+import entidades.Usuario;
+import java.util.List;
+
 /**
  *
  * @author Martin
  */
 public interface ICuenta {
     
+    public void guardar(String email, String displayname, String servicio, String token, String  nombreUsuario);
+    
+    public void modificar(Cuenta cuenta);
+    
+    public void borrar(Cuenta cuenta);
+    
+    public List<Cuenta> cargar(Usuario user);
 }

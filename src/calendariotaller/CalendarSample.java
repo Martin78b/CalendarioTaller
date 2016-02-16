@@ -114,6 +114,7 @@ public class CalendarSample {
 
       // authorization
       Credential credential = authorize();
+      
 
       // set up global Calendar instance
       client = new com.google.api.services.calendar.Calendar.Builder(
