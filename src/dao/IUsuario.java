@@ -18,4 +18,6 @@ public interface IUsuario {
     public void actualizar (Usuario usuario);
     
     public void borrar (Usuario usuario);
+    
+    public Usuario cargar(String nombre);
 }
