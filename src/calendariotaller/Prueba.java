@@ -33,7 +33,7 @@ public class Prueba {
 
         UsuarioDAO userdao = new UsuarioDAO();
         Usuario user = new Usuario("murai", "9999");
-        userdao.guardar(user);
+        userdao.actualizar(user);
 
     
     }}
