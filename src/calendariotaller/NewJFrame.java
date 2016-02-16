@@ -97,8 +97,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });*/
         //Prepare frame
-        frmMain = new JFrame("Calendario"); //Create frame
-        frmMain.setSize(330, 375); //Set size to 400x400 pixels
+        frmMain = new JFrame("Kalendaro"); //Create frame
+        frmMain.setSize(630, 460); //Set size to 400x400 pixels
         pane = frmMain.getContentPane(); //Get content pane
         pane.setLayout(null); //Apply null layout
         frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
@@ -119,7 +119,7 @@ public class NewJFrame extends javax.swing.JFrame {
         pnlCalendar = new JPanel(null);
 
         //Set border
-        pnlCalendar.setBorder(BorderFactory.createTitledBorder("Kalendaro"));
+        //pnlCalendar.setBorder(BorderFactory.createTitledBorder("Kalendaro"));
 
         //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
@@ -136,13 +136,13 @@ public class NewJFrame extends javax.swing.JFrame {
         pnlCalendar.add(stblCalendar);
 
         //Set bounds
-        pnlCalendar.setBounds(0, 0, 320, 335);
+        pnlCalendar.setBounds(230, 90, 390, 345);
         lblMonth.setBounds(160 - lblMonth.getPreferredSize().width / 2, 25, 100, 25);
         lblYear.setBounds(10, 305, 80, 20);
         cmbYear.setBounds(230, 305, 80, 20);
         btnPrev.setBounds(10, 25, 50, 25);
         btnNext.setBounds(260, 25, 50, 25);
-        stblCalendar.setBounds(10, 50, 300, 250);
+        stblCalendar.setBounds(10, 50, 370, 260);
 
         //Make frame visible
         frmMain.setResizable(false);
@@ -169,9 +169,13 @@ public class NewJFrame extends javax.swing.JFrame {
         tblCalendar.getTableHeader().setReorderingAllowed(false);
 
         //Single cell selection
-        tblCalendar.setColumnSelectionAllowed(true);
-        tblCalendar.setRowSelectionAllowed(true);
+        //tblCalendar.setColumnSelectionAllowed(true);
+        //tblCalendar.setRowSelectionAllowed(true);
         tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblCalendar.setCellSelectionEnabled(true);
+        
+        
+        
 
         //Set row/column count
         tblCalendar.setRowHeight(38);
@@ -288,4 +292,3 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
