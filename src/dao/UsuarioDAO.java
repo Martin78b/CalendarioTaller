@@ -35,7 +35,15 @@ public class UsuarioDAO implements IUsuario{
 
     @Override
     public void actualizar(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            stmt.executeUpdate("UPDATE USUARIO SET PASSWORD ='"+usuario.getPassword()+"' WHERE NOMBRE ='"+usuario.getNombre()+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
