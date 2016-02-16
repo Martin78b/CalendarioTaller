@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Usuario;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  *
@@ -13,7 +14,7 @@ import entidades.Usuario;
  */
 public interface IUsuario {
     
-    public void guardar(Usuario usuario);
+    public void guardar(Usuario usuario)throws SQLIntegrityConstraintViolationException;
     
     public void actualizar (Usuario usuario);
     

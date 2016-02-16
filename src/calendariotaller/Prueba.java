@@ -32,8 +32,8 @@ public class Prueba {
     public static void main(String[] args) throws SQLException {
 
         UsuarioDAO userdao = new UsuarioDAO();
-        Usuario user = new Usuario("murai", "cacacaca");
-        userdao.actualizar(user);
+        Usuario user = new Usuario("murai", "9999");
+        userdao.guardar(user);
 
     
     }}
