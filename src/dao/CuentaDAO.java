@@ -62,7 +62,7 @@ public class CuentaDAO implements ICuenta{
             Connection conn = DriverManager.getConnection(dbURL);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
-            ResultSet rs = stmt.executeQuery("SELECT * FROM CUENTA WHERE usuario="+user.getNombre());
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CUENTA WHERE usuario='"+user.getNombre()+"'");
             while(rs.next()){
                 cuenta= new Cuenta();
                 cuenta.setId(rs.getString("ID"));
@@ -70,7 +70,7 @@ public class CuentaDAO implements ICuenta{
                 cuenta.setEmail(rs.getString("email"));
                 cuenta.setServicio(rs.getString("servicio"));
                 cuenta.setToken(rs.getString("token"));
-                cuenta.setUsuario(user);
+                //cuenta.setUsuario(user);
                 lista.add(cuenta);
             }
         } catch (Exception ex){

@@ -24,9 +24,11 @@ public class Prueba {
         UsuarioDAO userdao = new UsuarioDAO();
         
         Usuario user = userdao.cargar("yo");
-        Cuenta acc= new Cuenta("1");
+        Cuenta acc= null;
         Collection<Cuenta> lista = cuenta.cargar(user);
-        System.out.println(lista.size());
-        System.out.println(acc.getServicio());
+        int i=1;
+        while(!lista.isEmpty()){
+            lista.
+        }
     }
 }
