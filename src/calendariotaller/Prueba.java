@@ -13,6 +13,7 @@ import entidades.Cuenta;
 import entidades.Usuario;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Iterator;
 /**
  *
  * @author Martin
@@ -26,9 +27,16 @@ public class Prueba {
         Usuario user = userdao.cargar("yo");
         Cuenta acc= null;
         Collection<Cuenta> lista = cuenta.cargar(user);
-        int i=1;
-        while(!lista.isEmpty()){
-            lista.
+        
+        for (Iterator<Cuenta> iterator = lista.iterator(); iterator.hasNext();) {
+            Cuenta next = iterator.next();
+            System.out.println("\n Un usuario");
+            System.out.println(next.getDisplayname());
+            System.out.println(next.getEmail());
+            System.out.println(next.getServicio());
+            System.out.println(next.getToken());
+            System.out.println(next.getUsuario());
+            
         }
     }
 }

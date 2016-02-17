@@ -13,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,29 +52,30 @@ public class CalendarioDao implements ICalendario {
     }
 
     @Override
-    public Usuario cargar(String id) {
-    Calendario calendario = new Calendario();
-    Cuenta cuenta = new Cuenta();
+    public Collection<Calendario> cargar(Cuenta cuenta) {
+    Collection<Calendario> lista = new ArrayList<>();
+    Calendario calendario = null;
         try {
             String dbURL = "jdbc:derby://localhost:1527/calendario";
             Connection conn = DriverManager.getConnection(dbURL);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
-            ResultSet rs = stmt.executeQuery("SELECT * FROM CALENDARIO WHERE ID='"+id+"'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CALENDARIO WHERE CUENTA='"+cuenta.getId()+"'");
             while(rs.next()){            
+                calendario = new Calendario();
                 calendario.setSummary(rs.getString("SUMMARY"));
                 calendario.setLocation(rs.getString("LOCATION"));
                 calendario.setDescription(rs.getString("DESCRIPTION"));
                 calendario.setKind(rs.getString("KIND"));
                 calendario.setTomezone(rs.getString("TOMEZONE"));
                 calendario.setSummary(rs.getString("SUMMARY"));
-                calendario.setCuenta();
-                
+                calendario.setCuenta(cuenta);
+                lista.add(calendario);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return calendario
+    return lista;
     }
 
 }

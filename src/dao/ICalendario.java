@@ -6,8 +6,10 @@
 package dao;
 
 import entidades.Calendario;
+import entidades.Cuenta;
 import entidades.Usuario;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collection;
 
 /**
  *
@@ -20,6 +22,6 @@ public interface ICalendario {
     
     public void borrar (Calendario calendario);
     
-    public Usuario cargar(String id);
+    public Collection<Calendario> cargar(Cuenta cuenta);
     
 }
