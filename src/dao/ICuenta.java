@@ -21,5 +21,5 @@ public interface ICuenta {
     
     public void borrar(Cuenta cuenta);
     
-    public List<Cuenta> cargar(Usuario user);
+    public Collection<Cuenta> cargar(Usuario user);
 }

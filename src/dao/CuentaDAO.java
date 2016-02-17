@@ -12,6 +12,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,10 +31,13 @@ public class CuentaDAO implements ICuenta{
             Connection conn = DriverManager.getConnection(dbURL);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
-            ResultSet rs = stmt.executeQuery("SELECT id FROM CUENTA WHERE max(id)");
+            ResultSet rs = stmt.executeQuery("SELECT max(ID) FROM CUENTA");
             rs.next();
-            
-            stmt.executeUpdate("INSERT INTO CUENTA (id, email, displayname, servicio, token, usuario) values ('"+rs.getString("id")+"','"+ email+"', '"+displayname+"', '"+servicio+"', '"+token+"', '"+nombreUsuario+"')");
+            String resultado = rs.getString(1);
+            System.out.println(resultado);
+            int identificador = Integer.parseInt(resultado);
+            identificador=identificador+1;
+            stmt.executeUpdate("INSERT INTO CUENTA (id, email, displayname, servicio, token, usuario) values ('"+identificador+"','"+ email+"', '"+displayname+"', '"+servicio+"', '"+token+"', '"+nombreUsuario+"')");
         } catch (SQLException ex) {
             Logger.getLogger(CuentaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,8 +54,29 @@ public class CuentaDAO implements ICuenta{
     }
 
     @Override
-    public List<Cuenta> cargar(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Collection<Cuenta> cargar(Usuario user) {
+        Collection<Cuenta> lista = new ArrayList<>();
+        Cuenta cuenta =null;
+        try{
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CUENTA WHERE usuario="+user.getNombre());
+            while(rs.next()){
+                cuenta= new Cuenta();
+                cuenta.setId(rs.getString("ID"));
+                cuenta.setDisplayname(rs.getString("displayname"));
+                cuenta.setEmail(rs.getString("email"));
+                cuenta.setServicio(rs.getString("servicio"));
+                cuenta.setToken(rs.getString("token"));
+                cuenta.setUsuario(user);
+                lista.add(cuenta);
+            }
+        } catch (Exception ex){
+            
+        }
+        return lista;
     }
     
 }
