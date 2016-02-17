@@ -7,7 +7,7 @@ package dao;
 
 import entidades.Cuenta;
 import entidades.Usuario;
-import java.util.List;
+import java.util.Collection;
 
 /**
  *
