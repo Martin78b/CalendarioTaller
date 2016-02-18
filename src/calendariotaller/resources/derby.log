@@ -1,8 +1,8 @@
-Thu Feb 18 16:09:58 ART 2016 : Servidor de red Apache Derby: Se ha iniciado 10.11.1.1 - (1616546) y estï¿½ listo para aceptar las conexiones en el puerto 1527
+Thu Feb 18 16:22:42 ART 2016 : Servidor de red Apache Derby: Se ha iniciado 10.11.1.1 - (1616546) y está listo para aceptar las conexiones en el puerto 1527
 ----------------------------------------------------------------
-Thu Feb 18 16:09:58 ART 2016:
- Iniciando instancia a816c00e-0152-f5c9-f058-00006cda51d7 de Derby, versiï¿½n The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): 
-en el directorio de base de datos C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources\calendario con el cargador de clases sun.misc.Launcher$AppClassLoader@3b061299
+Thu Feb 18 16:22:48 ART 2016:
+ Iniciando instancia a816c00e-0152-f5d5-998c-00006cda51d7 de Derby, versión The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): 
+en el directorio de base de datos C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources\calendario con el cargador de clases sun.misc.Launcher$AppClassLoader@57bd06bf
 Cargado desde file:/C:/Program%20Files/Java/jdk1.7.0_71/db-derby-10.11.1.1-bin/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_45-b18
@@ -11,11 +11,6 @@ os.name=Windows 8
 os.arch=amd64
 os.version=6.2
 derby.system.home=C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources
-------------  Principio de mensaje de error -------------
-
-El sistema puede estar en un estado inconsistente, falta el archivo C:\Users\Mauricio\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources\calendario\log\log1.dat
------------- Fin de mensaje de error -------------
-
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
 ----------------------------------------------------------------
-Thu Feb 18 16:10:08 ART 2016: cerrando motor de Derby
+Thu Feb 18 16:22:55 ART 2016: cerrando motor de Derby
