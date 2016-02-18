@@ -48,34 +48,49 @@ public class CalendarioDao implements ICalendario {
 
     @Override
     public void borrar(Calendario calendario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Collection<Calendario> cargar(Cuenta cuenta) {
-    Collection<Calendario> lista = new ArrayList<>();
-    Calendario calendario = null;
         try {
             String dbURL = "jdbc:derby://localhost:1527/calendario";
             Connection conn = DriverManager.getConnection(dbURL);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
-            ResultSet rs = stmt.executeQuery("SELECT * FROM CALENDARIO WHERE CUENTA='"+cuenta.getId()+"'");
-            while(rs.next()){            
+            stmt.executeUpdate("DELETE FROM CALENDARIO WHERE ID = '"+calendario.getId()+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
+    
+
+    @Override
+    public Collection<Calendario> cargar(Cuenta cuenta) {
+        Collection<Calendario> lista = new ArrayList<>();
+        Calendario calendario = null;
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CALENDARIO WHERE CUENTA='" + cuenta.getId() + "'");
+            while (rs.next()) {
                 calendario = new Calendario();
+                calendario.setId(rs.getString("ID"));
                 calendario.setSummary(rs.getString("SUMMARY"));
                 calendario.setLocation(rs.getString("LOCATION"));
                 calendario.setDescription(rs.getString("DESCRIPTION"));
                 calendario.setKind(rs.getString("KIND"));
                 calendario.setTomezone(rs.getString("TOMEZONE"));
-                calendario.setSummary(rs.getString("SUMMARY"));
                 calendario.setCuenta(cuenta);
+                //FALTA CARGAR LA LISTA DE EVENTOS
+                
                 lista.add(calendario);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return lista;
+        return lista;
     }
 
 }
