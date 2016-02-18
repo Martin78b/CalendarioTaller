@@ -5,10 +5,21 @@
  */
 package dao;
 
+import entidades.Evento;
+import entidades.Usuario;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 /**
  *
  * @author Martin
  */
 public interface IEvento {
     
+    public void guardar(Evento evento)throws SQLIntegrityConstraintViolationException;
+    
+    public void actualizar (Evento evento);
+    
+    public void borrar (Evento evento);
+    
+    public Usuario cargar(Evento evento);
 }
