@@ -56,7 +56,7 @@ public class UsuarioDAO implements IUsuario{
             Connection conn = DriverManager.getConnection(dbURL);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
-            stmt.executeUpdate("INSERT INTO USUARIO (nombre, password) values ('"+ usuario.getNombre()+"', '"+usuario.getPassword()+"')");
+            stmt.executeUpdate("DELETE FROM USUARIO WHERE nombre='"+usuario.getNombre()+"'");
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

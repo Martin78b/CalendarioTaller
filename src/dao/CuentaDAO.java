@@ -45,12 +45,30 @@ public class CuentaDAO implements ICuenta{
 
     @Override
     public void modificar(Cuenta cuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            stmt.executeUpdate("UPDATE CUENTA SET email ='"+cuenta.getEmail()+"', displayname='"+cuenta.getDisplayname()+"', servicio='"+cuenta.getServicio()+"', token='"+cuenta.getToken() +"' WHERE ID ='"+cuenta.getId()+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void borrar(Cuenta cuenta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            ResultSet rs = stmt.executeQuery("DELETE FROM CUENTA WHERE id='"+cuenta.getId()+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(CuentaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 
     @Override
