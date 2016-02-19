@@ -29,16 +29,16 @@ public class EventoDAO implements IEvento{
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
             stmt.executeUpdate("INSERT INTO EVENTO (ID, STATUS, CREATED, UPDATED, SUMMARY, DESCRIPTION, LOCATION, COLORID, STARTDATE,"
-                    + "STARTDATETIME, STARTDATETIMEZONE, ENDDATE, ENDDATETIME, ENDTIMEZONE, RECURRENCE, RECURRENCEEVENTID,"
+                    + "STARTDATETIME, STARTTIMEZONE, ENDDATE, ENDDATETIME, ENDTIMEZONE, RECURRENCE, RECURRENCEEVENTID,"
                     + "ORIGINALSTARTDATE, ORIGINALSTARTDATETIME, ORIGINALTIMEZONE, TRANSPARENCY, VISIBILITY, ICALUID, SEQUENCIA"
-                    + ", REIMNDERSDEFAULT, REMINDERMETHOD, REMINDERMINUTES, CALENDARIO) values ('"+ evento.getId()+"', '"+evento.getStatus()
-                    +"', '"+evento.getCreated()+"', '"+evento.getUpdated()+"', '"+evento.getSummary()+"', '"+evento.getDescription()
-                    +"', '"+evento.getLocation()+"', '"+evento.getColorid()+"', '"+evento.getStartdate()+"', '"+evento.getStartdatetime()
-                    +"', '"+evento.getStarttimezone()+"', '"+evento.getEnddate()+"', '"+evento.getEnddatetime()+"', '"+evento.getEndtimezone()
-                    +"', '"+evento.getRecurrence()+"', '"+evento.getRecurrenceeventid()+"', '"+evento.getOriginalstartdate()
-                    +"', '"+evento.getOriginalstartdatetime()+"', '"+evento.getOriginaltimezone()+"', '"+evento.getTransparency()
+                    + ", REMINDERSDEFAULT, REMINDERMETHOD, REMINDERMINUTES, CALENDARIO) values ('"+ evento.getId()+"', '"+evento.getStatus()
+                    +"', "+evento.getCreated().toString()+", "+evento.getUpdated().toString()+", '"+evento.getSummary()+"', '"+evento.getDescription()
+                    +"', '"+evento.getLocation()+"', '"+evento.getColorid()+"', "+evento.getStartdate()+", "+evento.getStartdatetime()
+                    +", '"+evento.getStarttimezone()+"', "+evento.getEnddate()+", "+evento.getEnddatetime()+", '"+evento.getEndtimezone()
+                    +"', '"+evento.getRecurrence()+"', '"+evento.getRecurrenceeventid()+"', "+evento.getOriginalstartdate()
+                    +", "+evento.getOriginalstartdatetime()+", '"+evento.getOriginaltimezone()+"', '"+evento.getTransparency()
                     +"', '"+evento.getVisibility()+"', '"+evento.getIcaluid()+"', '"+evento.getSequencia()+"', '"+evento.getRemindersdefault()
-                    +"', '"+evento.getRemindermethod()+"', '"+evento.getReminderminutes()+"', '"+evento.getCalendario().getId()+"')");
+                    +"', '"+evento.getRemindermethod()+"', "+evento.getReminderminutes()+", '"+evento.getCalendario().getId()+"')");
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

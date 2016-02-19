@@ -37,6 +37,7 @@ import java.io.Reader;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 /**
  *
@@ -47,7 +48,7 @@ public class Prueba {
     
     
     public static void main(String[] args) throws SQLException {
-        CuentaDAO cuenta = new CuentaDAO();
+      /*  CuentaDAO cuenta = new CuentaDAO();
         UsuarioDAO userdao = new UsuarioDAO();
         
         CalendarioDao cal = new CalendarioDao();
@@ -69,7 +70,12 @@ public class Prueba {
       System.out.println(calendario.getSummary());
       System.out.println(calendario.getTomezone());
       
-      
+      */
+        Date dt = new Date("2016-10-20");
+        //java.sql.Date dtsql = new java.sql.Date(2016, 2, 18);
+        java.sql.Date dtsql = new java.sql.Date(new Date().getTime());
+        System.out.println(dt);
+        System.out.println(dtsql.toString());
       
         
     }

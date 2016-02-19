@@ -14,8 +14,6 @@
 
 package calendariotaller;
 
-import org.mortbay.jetty.*;
-import javax.servlet.http.HttpServletRequest;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -39,16 +37,26 @@ import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
+import dao.CalendarioDao;
+import dao.CuentaDAO;
+import dao.EventoDAO;
+import entidades.Calendario;
+import entidades.Cuenta;
+import entidades.Evento;
+import entidades.Usuario;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * @author Yaniv Inbar
@@ -128,32 +136,6 @@ public class CalendarSample {
       updateCalendar(calendar);
       addEvent(calendar);
       
-      //Intentando guardar en base de datos.
-      //jdbc:derby://localhost:1527/calendario
-        String dbURL = "jdbc:derby://localhost:1527/calendario";
-        Connection conn = DriverManager.getConnection(dbURL);
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate("set schema APP");
-        stmt.executeUpdate("INSERT INTO CALENDARIO (id, summary, description, location, tomezone, kind, cuenta)"
-                + "VALUES ("+calendar.getId()+","+calendar.getSummary()+","+calendar.getDescription()+","+calendar.getLocation()+","
-                +calendar.getTimeZone()+","+calendar.getKind()+",'yo')");
-        stmt.close();
-        
-      
-       /** 
-        stmt.executeUpdate("set schema APP");
-        Event ev = new Event();
-        stmt.executeUpdate("INSERT INTO evento VALUES (1,"+ev.getStatus()+","+ev.getCreated()+","+ev.getUpdated()+
-                ","+ev.getSummary()+","+ev.getDescription()+","+ev.getLocation()+","+
-                ev.getColorId()+","+ev.getStart().getDate().toString()+","+ev.getStart().toString()+
-                ","+ev.getStart().getTimeZone()+","+ev.getEnd().getDate().toString()+","+
-                ev.getEnd().getDateTime().toString()+","+ev.getEnd().getTimeZone().toString()+","+
-                ev.getRecurrence().toString()+","+ev.getRecurringEventId()+","+
-                ev.getOriginalStartTime().getDate().toString()+","+ev.getOriginalStartTime().getDateTime().toString()+
-                ","+ev.getOriginalStartTime().getTimeZone().toString()+","+ev.getTransparency()+","+
-                ev.getVisibility()+","+ev.getICalUID()+","ev.getSequence()+","+ev.getReminders().toString()+",sms,15,CalendarioID)");
-        stmt.close();
-      */
       showEvents(calendar);
       deleteCalendarsUsingBatch();
       deleteCalendar(calendar);
@@ -197,14 +179,14 @@ public class CalendarSample {
 
     Calendar entry2 = new Calendar().setSummary("Calendar for Testing 2");
     client.calendars().insert(entry2).queue(batch, callback);
-
+    
     batch.execute();
   }
 
   private static Calendar addCalendar() throws IOException {
     View.header("Add Calendar");
     Calendar entry = new Calendar();
-    entry.setSummary("Calendar for Testing 3");
+    entry.setSummary("Calendario de Prueba");
     Calendar result = client.calendars().insert(entry).execute();
     View.display(result);
     return result;
@@ -224,6 +206,63 @@ public class CalendarSample {
     View.header("Add Event");
     Event event = newEvent();
     Event result = client.events().insert(calendar.getId(), event).execute();
+    EventoDAO eve = new EventoDAO();
+    Evento even = new Evento();
+    Cuenta cuenta = new Cuenta();
+    CuentaDAO acc = new CuentaDAO();
+    CalendarioDao cladao = new CalendarioDao();
+    Collection<Cuenta> coll = acc.cargar(new Usuario("yo"));
+    System.out.println("Cargó la cuenta del usuario yo");
+    Iterator<Cuenta> it = coll.iterator();
+    cuenta= it.next();
+    Calendario cal = new Calendario();
+    cal.setId(calendar.getId());
+    cal.setKind(calendar.getKind());
+    cal.setSummary(calendar.getSummary());
+    //cal.setTomezone(calendar.getTimeZone());
+    cal.setCuenta(cuenta);
+    cladao.guardar(cal);
+    System.out.println("Guardó el calendario en DDBB");
+    even.setCalendario(cal);
+    even.setColorid(result.getColorId());
+    even.setCreated(new Date(result.getCreated().getValue()));
+    even.setDescription(result.getDescription());
+    java.sql.Date startDate = new java.sql.Date(new Date().getTime());
+    java.sql.Date endDate = new java.sql.Date(startDate.getTime() + 3600000);
+    System.out.println(startDate);
+    System.out.println(endDate);
+    even.setEnddate(endDate);
+    even.setEnddatetime(endDate);
+    //even.setEndtimezone(result.getEnd().getTimeZone());
+    even.setIcaluid(result.getICalUID());
+    even.setId(result.getId());
+    even.setLocation(result.getLocation());
+    even.setOriginalstartdate(startDate);
+    even.setOriginalstartdatetime(startDate);
+    System.out.println("creó el evento son las fechas");
+    //even.setOriginaltimezone(result.getOriginalStartTime().getTimeZone());
+    //even.setRecurrence(result.getRecurrence().iterator().next());
+    //even.setRecurrenceeventid(result.getRecurringEventId());
+    //even.setRemindermethod(result.getReminders().toString());
+    //even.setReminderminutes(20);
+    //even.setRemindersdefault(result.getReminders().getUseDefault());
+    //even.setSequencia(result.getSequence().toString());
+    //even.setStartdate(new Date(result.getStart().getDate().getValue()));
+    //even.setStartdatetime(new Date(result.getStart().getDateTime().getValue()));
+    even.setStarttimezone("UTC");
+    even.setStatus(result.getStatus());
+    even.setSummary(result.getSummary());
+    even.setTransparency(result.getTransparency());
+    even.setUpdated(new Date(result.getUpdated().getValue()));
+    even.setVisibility(result.getVisibility());
+      try {
+          System.out.println("Guardando el evento");
+          eve.guardar(even);
+          System.out.println("Evento Guardado");
+      } catch (SQLIntegrityConstraintViolationException ex) {
+          Logger.getLogger(CalendarSample.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    
     View.display(result);
   }
 

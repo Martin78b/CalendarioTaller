@@ -1,7 +1,7 @@
-Thu Feb 18 16:00:06 ART 2016 : Servidor de red Apache Derby: Se ha iniciado 10.11.1.2 - (1629631) y está listo para aceptar las conexiones en el puerto 1527
+Fri Feb 19 15:16:58 ART 2016 : Servidor de red Apache Derby: Se ha iniciado 10.11.1.2 - (1629631) y está listo para aceptar las conexiones en el puerto 1527
 ----------------------------------------------------------------
-Thu Feb 18 16:00:18 ART 2016:
- Iniciando instancia a816c00e-0152-f5c0-d576-00002809214d de Derby, versión The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): 
+Fri Feb 19 15:16:59 ART 2016:
+ Iniciando instancia a816c00e-0152-fabf-c51e-00002809214d de Derby, versión The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): 
 en el directorio de base de datos C:\Users\Martin\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources\calendario con el cargador de clases sun.misc.Launcher$AppClassLoader@e53b93
 Cargado desde file:/C:/Program%20Files%20(x86)/Java/jdk1.8.0_45/db/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -13,4 +13,4 @@ os.version=6.3
 derby.system.home=C:\Users\Martin\Documents\NetBeansProjects\CalendarioTaller\src\calendariotaller\resources
 Cargador de clases de base de datos iniciado - derby.database.classpath=''
 ----------------------------------------------------------------
-Thu Feb 18 16:00:50 ART 2016: cerrando motor de Derby
+Fri Feb 19 15:33:59 ART 2016: cerrando motor de Derby
