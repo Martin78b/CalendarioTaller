@@ -5,9 +5,11 @@
  */
 package dao;
 
+import entidades.Calendario;
 import entidades.Evento;
 import entidades.Usuario;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collection;
 
 /**
  *
@@ -21,5 +23,5 @@ public interface IEvento {
     
     public void borrar (Evento evento);
     
-    public Usuario cargar(Evento evento);
+    public Collection<Evento> cargar(Calendario calendario);
 }

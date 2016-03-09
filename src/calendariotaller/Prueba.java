@@ -21,6 +21,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.Lists;
+import com.google.api.client.util.StringUtils;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Calendar;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -71,12 +73,12 @@ public class Prueba {
       System.out.println(calendario.getTomezone());
       
       */
-        Date dt = new Date("2016-10-20");
+        Date dt = new Date();
         //java.sql.Date dtsql = new java.sql.Date(2016, 2, 18);
         java.sql.Date dtsql = new java.sql.Date(new Date().getTime());
-        System.out.println(dt);
-        System.out.println(dtsql.toString());
-      
+        String st =new Timestamp(dt.getTime()).toString();
+        System.out.println(st.substring(11,19));
+        //System.out.println(dtsql.toString());
         
     }
 }
