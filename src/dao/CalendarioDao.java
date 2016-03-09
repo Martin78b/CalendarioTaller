@@ -37,7 +37,7 @@ public class CalendarioDao implements ICalendario {
                     + "'" + calendario.getLocation() + "', '" + calendario.getTomezone() + "' ,'" + calendario.getKind() + "', "
                     + "'" + calendario.getCuenta().getId() + "')");
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CalendarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -53,7 +53,7 @@ public class CalendarioDao implements ICalendario {
                     + "'"+calendario.getLocation()+"' , '"+calendario.getTomezone()+"', '"+calendario.getKind()+"') "
                     + "WHERE ID ='"+calendario.getId()+"'");
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CalendarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
           
     }
@@ -67,7 +67,7 @@ public class CalendarioDao implements ICalendario {
             stmt.executeUpdate("set schema APP");
             stmt.executeUpdate("DELETE FROM CALENDARIO WHERE ID = '"+calendario.getId()+"'");
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CalendarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -99,7 +99,7 @@ public class CalendarioDao implements ICalendario {
                 lista.add(calendario);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CalendarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
     }

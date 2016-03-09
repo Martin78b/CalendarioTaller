@@ -47,18 +47,47 @@ public class EventoDAO implements IEvento{
             
             stmt.executeUpdate(st);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     public void actualizar(Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            stmt.executeUpdate("UPDATE EVENTO SET (STATUS, CREATED, UPDATED, SUMMARY, DESCRIPTION, LOCATION, COLORID, STARTDATE,"
+                    + "STARTDATETIME, STARTTIMEZONE, ENDDATE, ENDDATETIME, ENDTIMEZONE, RECURRENCE, RECURRENCEEVENTID,"
+                    + "ORIGINALSTARTDATE, ORIGINALSTARTDATETIME, ORIGINALTIMEZONE, TRANSPARENCY, VISIBILITY, ICALUID, SEQUENCIA"
+                    + ", REMINDERSDEFAULT, REMINDERMETHOD, REMINDERMINUTES, CALENDARIO)"
+                    + "= ('"+evento.getStatus()+"' , '"+new java.sql.Date(evento.getCreated().getTime())+"' , '"+new java.sql.Date(evento.getUpdated().getTime())+"' , '"+
+                    evento.getSummary()+"' , '"+evento.getDescription()+"' , '"+evento.getLocation()+"' , '"+evento.getColorid()+"' , '"+
+                    new java.sql.Date(evento.getStartdate().getTime())+"' , '"+new java.sql.Date(evento.getStartdatetime().getTime())+"' , '"+
+                    evento.getStarttimezone()+"' , '"+new java.sql.Date(evento.getEnddate().getTime())+"' , '"+new java.sql.Date(evento.getEnddatetime().getTime())+"' , '"+
+                    evento.getEndtimezone()+"' , '"+evento.getRecurrence()+"' , '"+evento.getRecurrenceeventid()+"' , '"+
+                    new java.sql.Date(evento.getOriginalstartdate().getTime())+"' , '"+new java.sql.Date(evento.getOriginalstartdatetime().getTime())+"' , '"+
+                     evento.getOriginaltimezone()+"' , '"+evento.getTransparency()+"' , '"+evento.getVisibility()+"' , '"+
+                    evento.getIcaluid()+"' , '"+evento.getSequencia()+"' , '"+evento.getRemindersdefault()+"' , '"+
+                    evento.getRemindermethod()+"' , '"+evento.getReminderminutes()+"' , '"+evento.getCalendario().getId()+"') "
+                    + "WHERE ID ='"+evento.getId()+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void borrar(Evento evento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String dbURL = "jdbc:derby://localhost:1527/calendario";
+            Connection conn = DriverManager.getConnection(dbURL);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("set schema APP");
+            stmt.executeUpdate("DELETE FROM EVENTO WHERE ID = '"+evento.getId()+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -70,7 +99,7 @@ public class EventoDAO implements IEvento{
             Connection conn = DriverManager.getConnection(dbURL);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("set schema APP");
-            String st = "SELECT * WHERE CALENDARIO="+calendario.getId();
+            String st = "SELECT * FROME EVENTO WHERE CALENDARIO="+calendario.getId();
             ResultSet rs = stmt.executeQuery(st);
             while (rs.next()) {
                 
